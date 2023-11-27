@@ -13,7 +13,9 @@ const model =
   "stability-ai/stable-diffusion:db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf";
 
 router.route("/").get((req, res) => {
-  res.send("Hello from DALL-E!");
+   res.send(
+    "Hello from Imaginary generate\n lets generate some photos , make a post request to /api/v1/imaginary "
+  );
 });
 
 router.route("/").post(async (req, res) => {
