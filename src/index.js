@@ -10,7 +10,7 @@ const app = express();
 
 const url = process.env.MONGO_URL;
 const corsOptions = {
-  origin: '*', // or use '*' to allow all origins
+  origin: 'https://imaginary-ai.vercel.app', // or use '*' to allow all origins
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
   credentials: true,
