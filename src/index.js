@@ -16,7 +16,11 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 204
 };
+// Enable CORS for all routes
 app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));
 
 app.use("/api/v1/post", postRoutes);
