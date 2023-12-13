@@ -10,17 +10,13 @@ const app = express();
 
 const url = process.env.MONGO_URL;
 const corsOptions = {
-  origin: '*', // or use '*' to allow all origins
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  allowedHeaders: 'Content-Type,Authorization',
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 204,
 };
-// Enable CORS for all routes
-app.use(cors(corsOptions));
 
-// Handle preflight requests
-app.options('*', cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));
 
 app.use("/api/v1/post", postRoutes);
