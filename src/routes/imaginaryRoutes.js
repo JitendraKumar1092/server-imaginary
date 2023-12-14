@@ -1,6 +1,6 @@
-import express from "express";
-import * as dotenv from "dotenv";
-import Replicate from "replicate";
+const express = require("express");
+const dotenv = require("dotenv");
+const Replicate = require("replicate");
 
 dotenv.config();
 
@@ -10,18 +10,33 @@ const replicate = new Replicate({
   auth: process.env.REPLICATE_API_KEY,
 });
 const model =
-  "stability-ai/stable-diffusion:db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf";
+  "stability-ai/sdxl:39ed52f2a78e934b3ba6e2a89f5b1c712de7dfea535525255b1aa35c5565e08b";
 
 router.route("/").get((req, res) => {
-   res.send(
-    "Hello from Imaginary generate\n lets generate some photos , make a post request to /api/v1/imaginary "
-  );
+  res.send("Hello from DALL-E!");
 });
 
 router.route("/").post(async (req, res) => {
   try {
-    const input = req.body;
-    const output = await replicate.run(model, { input });
+    const input = req.body.prompt;
+    console.log(input);
+    const output = await replicate.run(model, {
+      input: {
+        width: 768,
+        height: 768,
+        prompt: input,
+        refine: "expert_ensemble_refiner",
+        scheduler: "K_EULER",
+        lora_scale: 0.6,
+        num_outputs: 1,
+        guidance_scale: 7.5,
+        apply_watermark: false,
+        high_noise_frac: 0.8,
+        negative_prompt: "",
+        prompt_strength: 0.8,
+        num_inference_steps: 25,
+      },
+    });
 
     res.status(200).json({ photo: output });
   } catch (error) {
@@ -29,4 +44,4 @@ router.route("/").post(async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
