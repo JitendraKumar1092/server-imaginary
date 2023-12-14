@@ -1,6 +1,6 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const Replicate = require("replicate");
+import express from "express";
+import * as dotenv from "dotenv";
+import Replicate from "replicate";
 
 dotenv.config();
 
@@ -44,4 +44,4 @@ router.route("/").post(async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
