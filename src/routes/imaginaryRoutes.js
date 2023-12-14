@@ -1,9 +1,7 @@
 import express from "express";
 import * as dotenv from "dotenv";
 import Replicate from "replicate";
-
 dotenv.config();
-
 const router = express.Router();
 
 const replicate = new Replicate({
@@ -11,11 +9,11 @@ const replicate = new Replicate({
 });
 const model =
   "stability-ai/sdxl:39ed52f2a78e934b3ba6e2a89f5b1c712de7dfea535525255b1aa35c5565e08b";
-
 router.route("/").get((req, res) => {
-  res.send("Hello from DALL-E!");
+  res.send(
+    "Hello from Imaginary generate\n lets generate some photos , make a post request to /api/v1/imaginary "
+  );
 });
-
 router.route("/").post(async (req, res) => {
   try {
     const input = req.body.prompt;
@@ -43,5 +41,4 @@ router.route("/").post(async (req, res) => {
     console.log(error);
   }
 });
-
 export default router;
